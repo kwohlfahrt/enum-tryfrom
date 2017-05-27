@@ -13,3 +13,6 @@ proc-macro = true
 
 [features]
 default = []
+
+[dev-dependencies]
+compiletest_rs = "0.2"
