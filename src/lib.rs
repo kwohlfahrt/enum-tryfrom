@@ -1,3 +1,6 @@
+#![cfg_attr(feature="clippy", feature(plugin))]
+#![cfg_attr(feature="clippy", plugin(clippy))]
+
 extern crate proc_macro;
 extern crate syn;
 #[macro_use]
@@ -11,7 +14,7 @@ fn filter_primitive_type_attr(attr: &syn::Attribute) -> Option<&str> {
     match attr.value {
         NameValue(ref ident, syn::Lit::Str(ref value, _)) => {
             if ident == "FromPrimitiveType" {
-                Some(&value)
+                Some(value)
             } else {
                 None
             }
