@@ -23,20 +23,9 @@ fn filter_primitive_type_attr(attr: &syn::Attribute) -> Option<&str> {
     }
 }
 
-fn impl_from_primitive(ast: &syn::DeriveInput) -> quote::Tokens {
-    let name = &ast.ident;
-    let mut attrs = ast.attrs.iter().filter_map(filter_primitive_type_attr);
-    let ty = syn::Ident::new(attrs.next().expect(
-        "Missing `FromPrimitiveType` annotation!"
-    ));
-
-    let variants =
-        if let syn::Body::Enum(ref variants) = ast.body {
-            variants
-        } else {
-            panic!("`FromPrimitive` is only supported on Enums")
-        };
-    let blocks = variants.iter().map(|var| {
+fn impl_single_type<'a, I: Iterator<Item=&'a syn::Variant>>
+    (name: &syn::Ident, ty: &syn::Ident, variants: I) -> quote::Tokens {
+    let blocks = variants.map(|var| {
         let ident = &var.ident;
         quote!{
             if v == #name::#ident as #ty {
@@ -56,6 +45,23 @@ fn impl_from_primitive(ast: &syn::DeriveInput) -> quote::Tokens {
             }
         }
     }
+}
+
+fn impl_from_primitive(ast: &syn::DeriveInput) -> quote::Tokens {
+    let name = &ast.ident;
+    let types = ast.attrs.iter().filter_map(filter_primitive_type_attr)
+        .map(syn::Ident::new);
+    let variants =
+        if let syn::Body::Enum(ref variants) = ast.body {
+            variants
+        } else {
+            panic!("`FromPrimitive` is only supported on Enums")
+        };
+    let impls = types.map(|ty| impl_single_type(name, &ty, variants.iter()));
+
+    let mut tokens = quote::Tokens::new();
+    tokens.append_all(impls);
+    tokens
 }
 
 #[proc_macro_derive(FromPrimitive, attributes(FromPrimitiveType))]

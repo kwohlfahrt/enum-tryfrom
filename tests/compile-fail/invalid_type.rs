@@ -3,8 +3,8 @@ extern crate enum_derive;
 
 #[derive(FromPrimitive)]
 //~^  ERROR proc-macro derive panicked
-enum Foo {
-    FirstFoo,
+struct Foo {
+    foo: i32,
 }
 
 fn main() {}

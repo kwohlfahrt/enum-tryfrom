@@ -3,6 +3,7 @@ extern crate enum_derive;
 
 #[derive(PartialEq,Eq,Debug,FromPrimitive)]
 #[FromPrimitiveType="u32"]
+#[FromPrimitiveType="i32"]
 enum Foo {
     FirstFoo = 1,
     SecondFoo,
@@ -17,6 +18,8 @@ fn test_literal() {
 #[test]
 fn test_var() {
     let v : u32 = 2;
+    assert_eq!(Foo::from(v), Foo::SecondFoo);
+    let v : i32 = 2;
     assert_eq!(Foo::from(v), Foo::SecondFoo);
 }
 
