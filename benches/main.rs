@@ -9,7 +9,7 @@ extern crate test;
 
 use test::Bencher;
 use std::mem::transmute;
-use rand::Rng;
+use rand::{Rng, SeedableRng, StdRng};
 
 #[derive(Debug)]
 struct InvalidEnumValue(());
@@ -26,7 +26,7 @@ enum Foo {
 #[bench]
 fn bench_raw(b: &mut Bencher) {
     let mut values = (0..255).map(|x| x % 4).collect::<Vec<u8>>();
-    let mut rng = rand::thread_rng();
+    let mut rng = StdRng::from_seed(&[4]);
     rng.shuffle(&mut values);
 
     b.iter(|| {
@@ -40,7 +40,7 @@ fn bench_raw(b: &mut Bencher) {
 #[bench]
 fn bench_from(b: &mut Bencher) {
     let mut values = (0..255).map(|x| x % 4).collect::<Vec<u8>>();
-    let mut rng = rand::thread_rng();
+    let mut rng = StdRng::from_seed(&[4]);
     rng.shuffle(&mut values);
 
     b.iter(|| {
