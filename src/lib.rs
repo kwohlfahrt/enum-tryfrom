@@ -1,3 +1,5 @@
+//! This crate contains macros for deriving useful traits on C-like enums
+
 #![cfg_attr(feature="clippy", feature(plugin))]
 #![cfg_attr(feature="clippy", plugin(clippy))]
 
@@ -67,6 +69,30 @@ fn impl_from_primitive(ast: &syn::DeriveInput) -> quote::Tokens {
     tokens
 }
 
+/// Generate `From` for each primitive type mentioned as a `FromPrimitiveType`
+/// attribute.
+///
+/// # Panics
+///
+/// Generated `impl` panics if primitive values are not valid enum values.
+///
+/// # Examples
+///
+/// ```
+/// # #[macro_use] extern crate enum_derive;
+/// #[derive(PartialEq,Debug,FromPrimitive)]
+/// #[FromPrimitiveType="u32"]
+/// enum Foo {
+///     FirstFoo = 1,
+///     SecondFoo,
+///     ThirdFoo,
+/// }
+///
+/// # fn main() {
+/// let v : u32 = 2;
+/// assert_eq!(Foo::from(v), Foo::SecondFoo);
+/// # }
+/// ```
 #[proc_macro_derive(FromPrimitive, attributes(FromPrimitiveType))]
 pub fn from_primitive(input: TokenStream) -> TokenStream {
     let s = input.to_string();
