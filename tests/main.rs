@@ -1,5 +1,5 @@
 #[macro_use]
-extern crate enum_derive;
+extern crate enum_proc_derive;
 
 #[derive(PartialEq,Eq,Debug,FromPrimitive)]
 #[FromPrimitiveType="u32"]

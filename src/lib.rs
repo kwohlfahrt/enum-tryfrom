@@ -79,7 +79,7 @@ fn impl_from_primitive(ast: &syn::DeriveInput) -> quote::Tokens {
 /// # Examples
 ///
 /// ```
-/// # #[macro_use] extern crate enum_derive;
+/// # #[macro_use] extern crate enum_proc_derive;
 /// #[derive(PartialEq,Debug,FromPrimitive)]
 /// #[FromPrimitiveType="u32"]
 /// enum Foo {

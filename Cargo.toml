@@ -1,5 +1,5 @@
 [package]
-name = "enum-derive"
+name = "enum-proc-derive"
 version = "0.1.0"
 authors = ["Kai Wohlfahrt <kai.scorpio@gmail.com>"]
 

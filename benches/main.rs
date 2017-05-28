@@ -1,7 +1,7 @@
 #![feature(test)]
 
 #[macro_use]
-extern crate enum_derive;
+extern crate enum_proc_derive;
 extern crate rand;
 extern crate test;
 

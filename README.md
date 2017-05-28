@@ -1,4 +1,4 @@
-# Enum Proc Deriving
+# Enum Proc Derive
 
 [![Build Status](https://travis-ci.org/kwohlfahrt/enum-proc-derive.svg?branch=master)](https://travis-ci.org/kwohlfahrt/enum-proc-derive)
 
