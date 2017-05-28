@@ -34,7 +34,7 @@ fn impl_single_type<'a, I: Iterator<Item=&'a syn::Variant>>
         }
         quote!{
             if v == #name::#ident as #ty {
-                #name::#ident
+                Ok(#name::#ident)
             }
         }
     });
@@ -42,10 +42,12 @@ fn impl_single_type<'a, I: Iterator<Item=&'a syn::Variant>>
     tokens.append_separated(blocks, "else");
 
     quote! {
-        impl From<#ty> for #name {
-            fn from(v: #ty) -> Self {
+        impl TryFrom<#ty> for #name {
+            type Error = InvalidEnumValue;
+
+            fn try_from(v: #ty) -> Result<Self, InvalidEnumValue> {
                 #tokens else {
-                    panic!("Unexpected enum variant!")
+                    Err(InvalidEnumValue(()))
                 }
             }
         }
@@ -69,16 +71,20 @@ fn impl_from_primitive(ast: &syn::DeriveInput) -> quote::Tokens {
     tokens
 }
 
-/// Generate `From` for each primitive type mentioned as a `FromPrimitiveType`
-/// attribute.
+/// Generate `TryFrom` for each primitive type mentioned as a
+/// `FromPrimitiveType` attribute.
 ///
-/// # Panics
-///
-/// Generated `impl` panics if primitive values are not valid enum values.
+/// When combined with unwrap, this is as fast as a bounds check + transmute, at
+/// least for small enums. See the `benches` folder for benchmarks.
 ///
 /// # Examples
 ///
 /// ```
+/// #![feature(try_from)]
+/// use std::convert::TryFrom;
+/// #[derive(Debug)]
+/// struct InvalidEnumValue(());
+///
 /// # #[macro_use] extern crate enum_proc_derive;
 /// #[derive(PartialEq,Debug,FromPrimitive)]
 /// #[FromPrimitiveType="u32"]
@@ -90,7 +96,7 @@ fn impl_from_primitive(ast: &syn::DeriveInput) -> quote::Tokens {
 ///
 /// # fn main() {
 /// let v : u32 = 2;
-/// assert_eq!(Foo::from(v), Foo::SecondFoo);
+/// assert_eq!(Foo::try_from(v).unwrap(), Foo::SecondFoo);
 /// # }
 /// ```
 #[proc_macro_derive(FromPrimitive, attributes(FromPrimitiveType))]

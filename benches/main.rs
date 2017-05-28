@@ -1,4 +1,6 @@
 #![feature(test)]
+#![feature(try_from)]
+use std::convert::TryFrom;
 
 #[macro_use]
 extern crate enum_proc_derive;
@@ -8,6 +10,9 @@ extern crate test;
 use test::Bencher;
 use std::mem::transmute;
 use rand::Rng;
+
+#[derive(Debug)]
+struct InvalidEnumValue(());
 
 #[derive(PartialEq,Eq,Debug,FromPrimitive)]
 #[FromPrimitiveType="u8"]
@@ -39,6 +44,6 @@ fn bench_from(b: &mut Bencher) {
     rng.shuffle(&mut values);
 
     b.iter(|| {
-        values.iter().map(|x| Foo::from(*x)).collect::<Vec<Foo>>()
+        values.iter().map(|x| Foo::try_from(*x).unwrap()).collect::<Vec<Foo>>()
     })
 }

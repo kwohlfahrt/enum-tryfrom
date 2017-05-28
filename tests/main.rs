@@ -1,5 +1,11 @@
+#![feature(try_from)]
+use std::convert::TryFrom;
+
 #[macro_use]
 extern crate enum_proc_derive;
+
+#[derive(Debug)]
+struct InvalidEnumValue(());
 
 #[derive(PartialEq,Eq,Debug,FromPrimitive)]
 #[FromPrimitiveType="u32"]
@@ -12,19 +18,18 @@ enum Foo {
 
 #[test]
 fn test_literal() {
-    assert_eq!(Foo::from(1), Foo::FirstFoo);
+    assert_eq!(Foo::try_from(1).unwrap(), Foo::FirstFoo);
 }
 
 #[test]
 fn test_var() {
     let v : u32 = 2;
-    assert_eq!(Foo::from(v), Foo::SecondFoo);
+    assert_eq!(Foo::try_from(v).unwrap(), Foo::SecondFoo);
     let v : i32 = 2;
-    assert_eq!(Foo::from(v), Foo::SecondFoo);
+    assert_eq!(Foo::try_from(v).unwrap(), Foo::SecondFoo);
 }
 
 #[test]
-#[should_panic]
 fn test_out_of_bounds() {
-    Foo::from(4);
+    assert!(Foo::try_from(4).is_err());
 }
