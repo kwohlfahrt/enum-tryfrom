@@ -27,6 +27,9 @@ fn impl_single_type<'a, I: Iterator<Item=&'a syn::Variant>>
     (name: &syn::Ident, ty: &syn::Ident, variants: I) -> quote::Tokens {
     let blocks = variants.map(|var| {
         let ident = &var.ident;
+        if var.data != syn::VariantData::Unit {
+            panic!("Enum variant may not store data!")
+        }
         quote!{
             if v == #name::#ident as #ty {
                 #name::#ident
