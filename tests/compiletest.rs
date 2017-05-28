@@ -1,3 +1,4 @@
+#![cfg(feature="compiletest")]
 extern crate compiletest_rs as compiletest;
 
 #[test]

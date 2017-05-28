@@ -7,12 +7,11 @@ authors = ["Kai Wohlfahrt <kai.scorpio@gmail.com>"]
 syn = "0.11"
 quote = "0.3"
 clippy = {version = "*", optional = true}
+compiletest_rs = {version = "0.2", optional = true}
 
 [lib]
 proc-macro = true
 
 [features]
 default = []
-
-[dev-dependencies]
-compiletest_rs = "0.2"
+compiletest = ["compiletest_rs"]
