@@ -5,9 +5,9 @@ use std::convert::TryFrom;
 extern crate enum_tryfrom_derive;
 extern crate enum_tryfrom;
 
-#[derive(PartialEq,Eq,Debug,FromPrimitive)]
-#[FromPrimitiveType="u32"]
-#[FromPrimitiveType="i32"]
+#[derive(PartialEq,Eq,Debug,TryFromPrimitive)]
+#[TryFromPrimitiveType="u32"]
+#[TryFromPrimitiveType="i32"]
 enum Foo {
     FirstFoo = 1,
     SecondFoo,

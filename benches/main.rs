@@ -12,8 +12,8 @@ use test::Bencher;
 use std::mem::transmute;
 use rand::{Rng, SeedableRng, StdRng};
 
-#[derive(PartialEq,Eq,Debug,FromPrimitive)]
-#[FromPrimitiveType="u8"]
+#[derive(PartialEq,Eq,Debug,TryFromPrimitive)]
+#[TryFromPrimitiveType="u8"]
 enum Foo {
     ZerothFoo = 0,
     FirstFoo,

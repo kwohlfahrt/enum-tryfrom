@@ -1,9 +1,9 @@
 #[macro_use]
 extern crate enum_tryfrom_derive;
 
-#[derive(FromPrimitive)]
+#[derive(TryFromPrimitive)]
 //~^  ERROR proc-macro derive panicked
-#[FromPrimitiveType="u32"]
+#[TryFromPrimitiveType="u32"]
 enum Foo {
     Bar(String),
     Baz(i32),

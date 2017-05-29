@@ -15,7 +15,7 @@ fn filter_primitive_type_attr(attr: &syn::Attribute) -> Option<&str> {
 
     match attr.value {
         NameValue(ref ident, syn::Lit::Str(ref value, _)) => {
-            if ident == "FromPrimitiveType" {
+            if ident == "TryFromPrimitiveType" {
                 Some(value)
             } else {
                 None
@@ -62,7 +62,7 @@ fn impl_from_primitive(ast: &syn::DeriveInput) -> quote::Tokens {
         if let syn::Body::Enum(ref variants) = ast.body {
             variants
         } else {
-            panic!("`FromPrimitive` is only supported on Enums")
+            panic!("`TryFromPrimitive` is only supported on Enums")
         };
     let impls = types.map(|ty| impl_single_type(name, &ty, variants.iter()));
 
@@ -72,7 +72,7 @@ fn impl_from_primitive(ast: &syn::DeriveInput) -> quote::Tokens {
 }
 
 /// Generate `TryFrom` for each primitive type mentioned as a
-/// `FromPrimitiveType` attribute.
+/// `TryFromPrimitiveType` attribute.
 ///
 /// When combined with unwrap, this is as fast as a bounds check + transmute, at
 /// least for small enums. See the `benches` folder for benchmarks.
@@ -86,8 +86,8 @@ fn impl_from_primitive(ast: &syn::DeriveInput) -> quote::Tokens {
 /// extern crate enum_tryfrom;
 ///
 /// #[macro_use] extern crate enum_tryfrom_derive;
-/// #[derive(PartialEq,Debug,FromPrimitive)]
-/// #[FromPrimitiveType="u32"]
+/// #[derive(PartialEq,Debug,TryFromPrimitive)]
+/// #[TryFromPrimitiveType="u32"]
 /// enum Foo {
 ///     FirstFoo = 1,
 ///     SecondFoo,
@@ -99,7 +99,7 @@ fn impl_from_primitive(ast: &syn::DeriveInput) -> quote::Tokens {
 /// assert_eq!(Foo::try_from(v).unwrap(), Foo::SecondFoo);
 /// # }
 /// ```
-#[proc_macro_derive(FromPrimitive, attributes(FromPrimitiveType))]
+#[proc_macro_derive(TryFromPrimitive, attributes(TryFromPrimitiveType))]
 pub fn from_primitive(input: TokenStream) -> TokenStream {
     let s = input.to_string();
     let ast = syn::parse_derive_input(&s).unwrap();
