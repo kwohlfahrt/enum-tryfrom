@@ -7,4 +7,4 @@ matrix:
   # compiletest_rs & clippy only work on nightly
   - rust: nightly
     script:
-    - cargo test --features "compiletest clippy" --verbose
+    - cargo test --all --features "compiletest clippy" --verbose

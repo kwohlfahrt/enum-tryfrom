@@ -1,20 +1,21 @@
 [package]
-name = "enum-proc-derive"
+name = "enum-tryfrom"
 version = "0.1.0"
 authors = ["Kai Wohlfahrt <kai.scorpio@gmail.com>"]
 
+[workspace]
+members = ["derive"]
+
 [dependencies]
-syn = "0.11"
-quote = "0.3"
 clippy = {version = "*", optional = true}
 compiletest_rs = {version = "0.2", optional = true}
-
-[lib]
-proc-macro = true
 
 [features]
 default = []
 compiletest = ["compiletest_rs"]
 
 [dev-dependencies]
+# For tests & benchmarks
+enum-tryfrom-derive = { path = "derive", version = "0.1" }
+# For benchmarks
 rand = "0.3"

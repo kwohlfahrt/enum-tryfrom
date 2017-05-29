@@ -3,16 +3,14 @@
 use std::convert::TryFrom;
 
 #[macro_use]
-extern crate enum_proc_derive;
+extern crate enum_tryfrom_derive;
+extern crate enum_tryfrom;
 extern crate rand;
 extern crate test;
 
 use test::Bencher;
 use std::mem::transmute;
 use rand::{Rng, SeedableRng, StdRng};
-
-#[derive(Debug)]
-struct InvalidEnumValue(());
 
 #[derive(PartialEq,Eq,Debug,FromPrimitive)]
 #[FromPrimitiveType="u8"]

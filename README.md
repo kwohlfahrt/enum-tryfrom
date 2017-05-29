@@ -1,8 +1,8 @@
-# Enum Proc Derive
+# Enum TryFrom
 
-[![Build Status](https://travis-ci.org/kwohlfahrt/enum-proc-derive.svg?branch=master)](https://travis-ci.org/kwohlfahrt/enum-proc-derive)
+[![Build Status](https://travis-ci.org/kwohlfahrt/enum-tryfrom.svg?branch=master)](https://travis-ci.org/kwohlfahrt/enum-tryfrom)
 
-A crate to derive useful enum attributes using procedural macros.
+A crate to derive the `TryFrom` trait on enums using procedural macros.
 
 Expect frequent breakage for now.
 

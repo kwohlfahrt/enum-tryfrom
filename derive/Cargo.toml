@@ -1,0 +1,19 @@
+[package]
+name = "enum-tryfrom-derive"
+version = "0.1.0"
+authors = ["Kai Wohlfahrt <kai.scorpio@gmail.com>"]
+
+[dependencies]
+syn = "0.11"
+quote = "0.3"
+clippy = {version = "*", optional = true}
+
+[lib]
+proc-macro = true
+
+[features]
+default = []
+
+[dev-dependencies]
+# For doc-tests
+enum-tryfrom = { path = "..", version = "0.1" }

@@ -2,10 +2,8 @@
 use std::convert::TryFrom;
 
 #[macro_use]
-extern crate enum_proc_derive;
-
-#[derive(Debug)]
-struct InvalidEnumValue(());
+extern crate enum_tryfrom_derive;
+extern crate enum_tryfrom;
 
 #[derive(PartialEq,Eq,Debug,FromPrimitive)]
 #[FromPrimitiveType="u32"]

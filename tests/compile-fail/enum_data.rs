@@ -1,5 +1,5 @@
 #[macro_use]
-extern crate enum_proc_derive;
+extern crate enum_tryfrom_derive;
 
 #[derive(FromPrimitive)]
 //~^  ERROR proc-macro derive panicked
