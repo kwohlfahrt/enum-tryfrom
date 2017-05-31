@@ -8,6 +8,8 @@ Expect frequent breakage for now.
 
 ## Documentation
 
+[![Documentation](https://docs.rs/enum-tryfrom/badge.svg)](https://docs.rs/enum-tryfrom)
+
 This adds the ability to `#[derive(TryFromPrimitive)]`, which in combination
 with one (well zero, but that's not useful) or more
 `#[FromPrimitiveType="type"]` attributes lets you automatically derive
