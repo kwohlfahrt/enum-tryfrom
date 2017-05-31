@@ -1,6 +1,6 @@
 [package]
 name = "enum-tryfrom-derive"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Kai Wohlfahrt <kai.scorpio@gmail.com>"]
 description = "A crate to derive TryFrom<primitive> for enums"
 license = "MIT"
@@ -16,3 +16,7 @@ proc-macro = true
 
 [features]
 default = []
+
+[dev-dependencies]
+# For doc-tests
+enum-tryfrom = { path = "..", version = "0.1" }
