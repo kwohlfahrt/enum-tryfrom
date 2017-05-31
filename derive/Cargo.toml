@@ -16,7 +16,3 @@ proc-macro = true
 
 [features]
 default = []
-
-[dev-dependencies]
-# For doc-tests
-enum-tryfrom = { path = "..", version = "0.1" }
