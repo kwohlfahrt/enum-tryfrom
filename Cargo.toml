@@ -13,16 +13,12 @@ travis-ci = { repository = "https://github.com/kwohlfahrt/enum-tryfrom" }
 [workspace]
 members = ["derive"]
 
-[dependencies]
-clippy = {version = "*", optional = true}
-compiletest_rs = {version = "*", optional = true}
-
 [features]
 default = []
-compiletest = ["compiletest_rs"]
 
 [dev-dependencies]
-# For tests & benchmarks
 enum-tryfrom-derive = { path = "derive", version = "0.1" }
+# For tests
+compiletest_rs = { version = "*" }
 # For benchmarks
 rand = "0.3"

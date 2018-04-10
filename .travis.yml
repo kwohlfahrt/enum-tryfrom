@@ -4,7 +4,12 @@ cache: cargo
 # Can't use stable/beta until try_from is stabilized
 matrix:
   include:
-  # compiletest_rs & clippy only work on nightly
   - rust: nightly
     script:
-    - cargo test --all --features "compiletest clippy" --verbose
+    - cargo test --all --verbose
+  # clippy only works on nightly
+  - rust: nightly
+    install:
+    - cargo install clippy
+    script:
+    - cargo clippy --all --verbose

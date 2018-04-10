@@ -1,4 +1,3 @@
-#![cfg(feature="compiletest")]
 extern crate compiletest_rs as compiletest;
 
 // Doesn't seem to work when not in root/tests
