@@ -1,8 +1,11 @@
 //! This crate defines types and traits for use with `enum-tryfrom-derive` See
 //! the documentation of that crate for usage details.
+#![cfg_attr(not(feature="std"), no_std)]
 
-use std::error::Error;
-use std::fmt::Display;
+#[cfg(feature="std")]
+extern crate core;
+
+use core::fmt::Display;
 
 #[derive(Debug,Default)]
 pub struct InvalidEnumValue(());
@@ -16,20 +19,22 @@ impl InvalidEnumValue {
 }
 
 impl Display for InvalidEnumValue {
-    fn fmt(&self, fmt: &mut std::fmt::Formatter) -> std::fmt::Result {
+    fn fmt(&self, fmt: &mut core::fmt::Formatter) -> core::fmt::Result {
         DESCRIPTION.fmt(fmt)
     }
 }
 
-impl Error for InvalidEnumValue {
+#[cfg(feature="std")]
+impl std::error::Error for InvalidEnumValue {
     fn description(&self) -> &str {
         DESCRIPTION
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature="std"))]
 mod tests {
     use super::*;
+    use std::error::Error;
 
     #[test]
     fn test_description() {

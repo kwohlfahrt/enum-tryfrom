@@ -7,6 +7,9 @@ matrix:
   - rust: nightly
     script:
     - cargo test --all --verbose
+  - rust: nightly
+    script:
+    - cargo test --all --verbose --no-default-features
   # clippy only works on nightly
   - rust: nightly
     install:
