@@ -1,7 +1,7 @@
 [package]
 name = "enum-tryfrom"
-version = "0.1.1"
-authors = ["Kai Wohlfahrt <kai.scorpio@gmail.com>"]
+version = "0.1.2"
+authors = ["Kai Wohlfahrt <kai.wohlfahrt@gmail.com>"]
 description = "Error types and traits for use with enum-tryfrom-derive"
 license = "MIT"
 repository = "https://github.com/kwohlfahrt/enum-tryfrom"
