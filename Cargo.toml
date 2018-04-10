@@ -1,6 +1,6 @@
 [package]
 name = "enum-tryfrom"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Kai Wohlfahrt <kai.scorpio@gmail.com>"]
 description = "Error types and traits for use with enum-tryfrom-derive"
 license = "MIT"
@@ -15,7 +15,7 @@ members = ["derive"]
 
 [dependencies]
 clippy = {version = "*", optional = true}
-compiletest_rs = {version = "0.2", optional = true}
+compiletest_rs = {version = "*", optional = true}
 
 [features]
 default = []

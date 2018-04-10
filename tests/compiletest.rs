@@ -6,10 +6,11 @@ extern crate compiletest_rs as compiletest;
 #[test]
 fn compile_fail() {
     use std::path::PathBuf;
-    let mut config = compiletest::default_config();
+    let mut config = compiletest::Config::default();
     config.mode = compiletest::common::Mode::CompileFail;
     config.src_base = PathBuf::from("tests/compile-fail");
-    config.target_rustcflags = Some("-L target/debug".to_string());
+    config.link_deps();
+    config.clean_rmeta();
 
     compiletest::run_tests(&config)
 }
