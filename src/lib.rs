@@ -4,10 +4,10 @@
 use std::error::Error;
 use std::fmt::Display;
 
-#[derive(Debug)]
+#[derive(Debug,Default)]
 pub struct InvalidEnumValue(());
 
-const DESCRIPTION : &'static str = "Attempted to convert invalid value to enum";
+const DESCRIPTION : &str = "Attempted to convert invalid value to enum";
 
 impl InvalidEnumValue {
     pub fn new() -> Self {
