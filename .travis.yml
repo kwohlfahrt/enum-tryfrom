@@ -10,6 +10,6 @@ matrix:
   # clippy only works on nightly
   - rust: nightly
     install:
-    - cargo install clippy
+    - cargo install --force clippy
     script:
     - cargo clippy --all --verbose
