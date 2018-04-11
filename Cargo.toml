@@ -19,6 +19,6 @@ default = []
 [dev-dependencies]
 enum-tryfrom-derive = { path = "derive", version = "0.1" }
 # For tests
-compiletest_rs = { version = "*" }
+compiletest_rs = { version = "0.3" }
 # For benchmarks
-rand = "0.3"
+rand = "0.4"
