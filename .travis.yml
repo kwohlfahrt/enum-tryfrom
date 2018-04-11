@@ -1,5 +1,5 @@
 language: rust
-cache: cargo
+# Can't use cache due to compiletest-rs#101
 
 # Can't use stable/beta until try_from is stabilized
 matrix:
