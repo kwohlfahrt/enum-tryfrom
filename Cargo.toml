@@ -1,6 +1,6 @@
 [package]
 name = "enum-tryfrom"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Kai Wohlfahrt <kai.wohlfahrt@gmail.com>"]
 description = "Error types and traits for use with enum-tryfrom-derive"
 license = "MIT"
@@ -18,7 +18,7 @@ default = ["std"]
 std = []
 
 [dev-dependencies]
-enum-tryfrom-derive = { path = "derive", version = "0.1" }
+enum-tryfrom-derive = { path = "derive", version = "0.2" }
 # For tests
 compiletest_rs = { version = "0.3" }
 # For benchmarks

@@ -1,6 +1,6 @@
 [package]
 name = "enum-tryfrom-derive"
-version = "0.1.3"
+version = "0.2.1"
 authors = ["Kai Wohlfahrt <kai.scorpio@gmail.com>"]
 description = "A crate to derive TryFrom<primitive> for enums"
 license = "MIT"
